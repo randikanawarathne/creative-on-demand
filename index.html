@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative on Demand | Social Media Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&family=Oswald:wght@700&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #0d0d14;
+            --secondary: #12121f;
+            --tertiary: #1a1a2e;
+            --accent: #e94560;
+            --accent-hover: #ff5a75;
+            --surface: #16162a;
+            --surface-light: #1f1f3a;
+            --text-primary: #ffffff;
+            --text-secondary: #8888a0;
+            --text-muted: #555570;
+            --border: rgba(255,255,255,0.08);
+            --border-hover: rgba(255,255,255,0.15);
+            --template1: #00d9ff;
+            --template2: #ff6b35;
+            --template3: #7b2cbf;
+            --template4: #22c55e;
+            --template5: #f59e0b;
+            --success: #22c55e;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --shadow: 0 4px 24px rgba(0,0,0,0.4);
+            --shadow-lg: 0 8px 48px rgba(0,0,0,0.6);
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(233,69,96,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(123,44,191,0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0,217,255,0.04) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .app-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background: rgba(18, 18, 31, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 16px 40px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent), #ff8fa3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.4);
+        }
+
+        .brand-text h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, #fff, #e94560);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .brand-text span {
+            font-size: 11px;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .help-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .help-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Main Layout */
+        main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 0;
+        }
+
+        /* Controls Panel */
+        .controls-panel {
+            background: var(--secondary);
+            padding: 28px;
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            max-height: calc(100vh - 77px);
+        }
+
+        .panel-section {
+            margin-bottom: 28px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .section-badge {
+            font-size: 10px;
+            padding: 4px 10px;
+            background: var(--surface);
+            border-radius: 20px;
+            color: var(--text-muted);
+        }
+
+        /* Template Grid */
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .template-card {
+            aspect-ratio: 1;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            background: #1a1a2e;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .template-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .template-card.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(233, 69, 96, 0.2), 0 8px 30px rgba(233, 69, 96, 0.3);
+        }
+
+        .template-preview {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Bold Template Preview */
+        .template-card[data-template="1"] .template-preview {
+            background: linear-gradient(180deg, #0a0a15 0%, #1a1a2e 100%);
+        }
+        .template-card[data-template="1"] .template-preview::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: var(--template1);
+        }
+        .template-card[data-template="1"] .preview-text {
+            position: absolute;
+            top: 20%;
+            left: 18%;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 11px;
+            color: #fff;
+            letter-spacing: 1px;
+            line-height: 1.3;
+        }
+        .template-card[data-template="1"] .preview-line {
+            position: absolute;
+            left: 18%;
+            top: 50%;
+            width: 45%;
+            height: 3px;
+            background: var(--template1);
+        }
+
+        /* Modern Template Preview */
+        .template-card[data-template="2"] .template-preview {
+            display: flex;
+        }
+        .template-card[data-template="2"] .preview-left {
+            width: 40%;
+            background: var(--template2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .template-card[data-template="2"] .preview-left::after {
+            content: 'TEXT';
+            font-family: 'Oswald', sans-serif;
+            font-size: 8px;
+            color: rgba(255,255,255,0.5);
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+        .template-card[data-template="2"] .preview-right {
+            width: 60%;
+            background: linear-gradient(135deg, #2a2a4e 0%, #1a1a2e 100%);
+        }
+        .template-card[data-template="2"] .preview-right::after {
+            content: 'IMG';
+            position: absolute;
+            top: 50%;
+            left: 55%;
+            transform: translate(-50%, -50%);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14px;
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* Elegant Template Preview */
+        .template-card[data-template="3"] .template-preview {
+            background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+            padding: 12px;
+        }
+        .template-card[data-template="3"] .preview-frame {
+            width: 100%;
+            height: 55%;
+            background: #2a2a4e;
+            border-radius: 4px;
+            position: relative;
+            border: 2px solid var(--template3);
+        }
+        .template-card[data-template="3"] .preview-frame::after {
+            content: 'IMG';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 10px;
+            color: rgba(255,255,255,0.3);
+        }
+        .template-card[data-template="3"] .preview-text {
+            position: absolute;
+            bottom: 18%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 7px;
+            color: #fff;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .template-card[data-template="3"] .preview-line {
+            position: absolute;
+            bottom: 32%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30%;
+            height: 1px;
+            background: var(--template3);
+        }
+
+        /* Minimal Template Preview */
+        .template-card[data-template="4"] .template-preview {
+            display: flex;
+        }
+        .template-card[data-template="4"] .preview-left {
+            width: 45%;
+            background: #f5f5f5;
+            position: relative;
+        }
+        .template-card[data-template="4"] .preview-left::after {
+            content: 'IMG';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 10px;
+            color: #aaa;
+        }
+        .template-card[data-template="4"] .preview-right {
+            width: 55%;
+            background: var(--template4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .template-card[data-template="4"] .preview-right::after {
+            content: 'HEAD';
+            font-family: 'Montserrat', sans-serif;
+            font-size: 8px;
+            font-weight: 800;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Vibrant Template Preview */
+        .template-card[data-template="5"] .template-preview {
+            background: #0a0a15;
+        }
+        .template-card[data-template="5"] .preview-shape {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50%;
+            height: 40%;
+            background: var(--template5);
+            clip-path: polygon(0 0, 100% 0, 60% 100%, 0% 100%);
+        }
+        .template-card[data-template="5"] .preview-circle {
+            position: absolute;
+            right: 10%;
+            top: 25%;
+            width: 50%;
+            height: 50%;
+            background: linear-gradient(135deg, #3a3a5e 0%, #2a2a4e 100%);
+            border-radius: 50%;
+        }
+        .template-card[data-template="5"] .preview-circle::after {
+            content: 'IMG';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12px;
+            color: rgba(255,255,255,0.3);
+        }
+        .template-card[data-template="5"] .preview-text {
+            position: absolute;
+            bottom: 15%;
+            left: 5%;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 10px;
+            color: #fff;
+        }
+
+        .template-name {
+            padding: 10px;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            background: rgba(0,0,0,0.3);
+        }
+
+        .template-card.active .template-name {
+            color: var(--accent);
+        }
+
+        .template-size {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 9px;
+            padding: 3px 6px;
+            background: rgba(0,0,0,0.6);
+            border-radius: 4px;
+            color: rgba(255,255,255,0.7);
+            z-index: 10;
+        }
+
+        /* Format Selector */
+        .format-tabs {
+            display: flex;
+            background: var(--surface);
+            border-radius: var(--radius-sm);
+            padding: 4px;
+            gap: 4px;
+        }
+
+        .format-tab {
+            flex: 1;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .format-tab.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .format-tab:hover:not(.active) {
+            color: var(--text-primary);
+        }
+
+        /* Input Groups */
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .input-label label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .char-count {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(233, 69, 96, 0.1);
+            background: var(--surface-light);
+        }
+
+        input[type="text"]::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Text Style Options */
+        .text-options {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .text-style-btn {
+            flex: 1;
+            padding: 10px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .text-style-btn:hover {
+            border-color: var(--border-hover);
+            color: var(--text-primary);
+        }
+
+        .text-style-btn.active {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(233, 69, 96, 0.1);
+        }
+
+        /* Image Upload */
+        .upload-zone {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            background: var(--surface);
+        }
+
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--accent);
+            background: rgba(233, 69, 96, 0.05);
+        }
+
+        .upload-zone input {
+            display: none;
+        }
+
+        .upload-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .upload-icon {
+            width: 44px;
+            height: 44px;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+
+        .upload-zone:hover .upload-icon {
+            color: var(--accent);
+        }
+
+        .upload-zone p {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .upload-zone .browse {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .upload-zone .formats {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .preview-thumb {
+            position: absolute;
+            inset: 0;
+            display: none;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .preview-thumb.has-image {
+            display: block;
+        }
+
+        .preview-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
+            background: rgba(0,0,0,0.75);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.2s;
+        }
+
+        .upload-zone:hover .remove-image {
+            opacity: 1;
+        }
+
+        .remove-image:hover {
+            background: var(--accent);
+        }
+
+        /* Color Picker */
+        .color-picker-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .color-picker-wrapper {
+            position: relative;
+            width: 48px;
+            height: 48px;
+        }
+
+        .color-picker-wrapper input[type="color"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .color-picker-wrapper input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        .color-picker-wrapper input[type="color"]::-webkit-color-swatch {
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+        }
+
+        .color-info {
+            flex: 1;
+        }
+
+        .color-info label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .color-info span {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-family: monospace;
+        }
+
+        .preset-colors {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .preset-color {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .preset-color:hover {
+            transform: scale(1.1);
+        }
+
+        .preset-color.active {
+            border-color: white;
+            box-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .quick-action {
+            flex: 1;
+            padding: 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .quick-action:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(233, 69, 96, 0.05);
+        }
+
+        /* Download Button */
+        .download-section {
+            margin-top: 28px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .download-btn {
+            width: 100%;
+            padding: 18px 32px;
+            background: linear-gradient(135deg, var(--accent), #ff8fa3);
+            border: none;
+            border-radius: var(--radius);
+            color: white;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(233, 69, 96, 0.4);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 35px rgba(233, 69, 96, 0.5);
+        }
+
+        .download-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .download-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Preview Panel */
+        .preview-panel {
+            background: var(--primary);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-panel::before {
+            content: '';
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(233,69,96,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .preview-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 24px;
+        }
+
+        .preview-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .preview-title .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .preview-info {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .canvas-wrapper {
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            border-radius: 4px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        #previewCanvas {
+            display: block;
+            max-width: 100%;
+            max-height: calc(100vh - 220px);
+            transition: transform 0.3s;
+        }
+
+        .canvas-wrapper:hover #previewCanvas {
+            transform: scale(1.01);
+        }
+
+        /* Tips */
+        .tips {
+            margin-top: 24px;
+            padding: 16px;
+            background: var(--surface);
+            border-radius: var(--radius);
+            border-left: 3px solid var(--template1);
+            max-width: 600px;
+        }
+
+        .tips-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--template1);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tips p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal {
+            background: var(--secondary);
+            border-radius: var(--radius);
+            padding: 32px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .modal h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 20px 0 10px;
+        }
+
+        .modal p, .modal li {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .modal ul {
+            padding-left: 20px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 24px;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: var(--surface);
+            color: var(--text-primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            padding: 14px 40px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        footer p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        footer span {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            main {
+                grid-template-columns: 380px 1fr;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            .controls-panel {
+                max-height: none;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .preview-panel {
+                min-height: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 14px 20px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .brand-text h1 {
+                font-size: 22px;
+            }
+
+            .controls-panel {
+                padding: 20px;
+            }
+
+            .template-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+
+            .preview-panel {
+                padding: 20px;
+                min-height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo-section">
+                <div class="logo">C</div>
+                <div class="brand-text">
+                    <h1>Creative on Demand</h1>
+                    <span>Social Media Generator</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="help-btn" id="helpBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    How to Use
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <div class="controls-panel">
+                <!-- Templates Section -->
+                <div class="panel-section">
+                    <div class="section-header">
+                        <div class="section-title">Choose Template</div>
+                        <div class="section-badge">5 Styles</div>
+                    </div>
+                    <div class="template-grid">
+                        <div class="template-card active" data-template="1">
+                            <div class="template-preview">
+                                <div class="preview-text">HEADLINE<br>HERE</div>
+                                <div class="preview-line"></div>
+                            </div>
+                            <span class="template-name">Bold</span>
+                            <span class="template-size">1:1</span>
+                        </div>
+                        <div class="template-card" data-template="2">
+                            <div class="template-preview">
+                                <div class="preview-left"></div>
+                                <div class="preview-right"></div>
+                            </div>
+                            <span class="template-name">Modern</span>
+                            <span class="template-size">1:1</span>
+                        </div>
+                        <div class="template-card" data-template="3">
+                            <div class="template-preview">
+                                <div class="preview-frame"></div>
+                                <div class="preview-line"></div>
+                                <div class="preview-text">HEADLINE</div>
+                            </div>
+                            <span class="template-name">Elegant</span>
+                            <span class="template-size">4:5</span>
+                        </div>
+                        <div class="template-card" data-template="4">
+                            <div class="template-preview">
+                                <div class="preview-left"></div>
+                                <div class="preview-right"></div>
+                            </div>
+                            <span class="template-name">Minimal</span>
+                            <span class="template-size">1:1</span>
+                        </div>
+                        <div class="template-card" data-template="5">
+                            <div class="template-preview">
+                                <div class="preview-shape"></div>
+                                <div class="preview-circle"></div>
+                                <div class="preview-text">HEADLINE</div>
+                            </div>
+                            <span class="template-name">Vibrant</span>
+                            <span class="template-size">9:16</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Format Section -->
+                <div class="panel-section">
+                    <div class="section-header">
+                        <div class="section-title">Post Format</div>
+                    </div>
+                    <div class="format-tabs">
+                        <button class="format-tab active" data-format="square">Square</button>
+                        <button class="format-tab" data-format="portrait">Portrait</button>
+                        <button class="format-tab" data-format="story">Story</button>
+                    </div>
+                </div>
+
+                <!-- Text Section -->
+                <div class="panel-section">
+                    <div class="section-header">
+                        <div class="section-title">Content</div>
+                        <div class="char-count"><span id="headlineCount">0</span>/50</div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="input-label">
+                            <label for="headline">Headline *</label>
+                        </div>
+                        <input type="text" id="headline" placeholder="Enter your main headline" maxlength="50">
+                        <div class="text-options">
+                            <button class="text-style-btn active" data-style="uppercase">Upper</button>
+                            <button class="text-style-btn" data-style="normal">Normal</button>
+                            <button class="text-style-btn" data-style="title">Title</button>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-label">
+                            <label for="tagline">Tagline</label>
+                            <div class="char-count"><span id="taglineCount">0</span>/80</div>
+                        </div>
+                        <input type="text" id="tagline" placeholder="Add a supporting tagline" maxlength="80">
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-label">
+                            <label for="brandName">Brand Name</label>
+                        </div>
+                        <input type="text" id="brandName" placeholder="Your company name" maxlength="30">
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="panel-section">
+                    <div class="section-title">Quick Fill</div>
+                    <div class="quick-actions">
+                        <button class="quick-action" data-preset="1">Launch</button>
+                        <button class="quick-action" data-preset="2">Sale</button>
+                        <button class="quick-action" data-preset="3">Event</button>
+                        <button class="quick-action" data-preset="4">New</button>
+                    </div>
+                </div>
+
+                <!-- Color Section -->
+                <div class="panel-section">
+                    <div class="section-title">Accent Color</div>
+                    <div class="color-picker-group">
+                        <div class="color-picker-wrapper">
+                            <input type="color" id="accentColor" value="#00d9ff">
+                        </div>
+                        <div class="color-info">
+                            <label>Custom Color</label>
+                            <span id="colorValue">#00d9ff</span>
+                        </div>
+                    </div>
+                    <div class="preset-colors">
+                        <div class="preset-color active" style="background: #00d9ff" data-color="#00d9ff"></div>
+                        <div class="preset-color" style="background: #ff6b35" data-color="#ff6b35"></div>
+                        <div class="preset-color" style="background: #7b2cbf" data-color="#7b2cbf"></div>
+                        <div class="preset-color" style="background: #22c55e" data-color="#22c55e"></div>
+                        <div class="preset-color" style="background: #f59e0b" data-color="#f59e0b"></div>
+                        <div class="preset-color" style="background: #ef4444" data-color="#ef4444"></div>
+                        <div class="preset-color" style="background: #3b82f6" data-color="#3b82f6"></div>
+                        <div class="preset-color" style="background: #ec4899" data-color="#ec4899"></div>
+                    </div>
+                </div>
+
+                <!-- Image Upload -->
+                <div class="panel-section">
+                    <div class="section-title">Featured Image</div>
+                    <div class="upload-zone" id="uploadZone">
+                        <input type="file" id="imageInput" accept="image/jpeg,image/png,image/webp">
+                        <div class="upload-content">
+                            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            <p>Drag & drop or <span class="browse">browse</span></p>
+                            <p class="formats">JPG, PNG, WebP • Min 400x400</p>
+                        </div>
+                        <div class="preview-thumb" id="previewThumb">
+                            <img id="uploadedImage" src="" alt="Uploaded">
+                            <button class="remove-image" id="removeImage">&times;</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Download -->
+                <div class="download-section">
+                    <button class="download-btn" id="downloadBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                        </svg>
+                        Download Image
+                    </button>
+                </div>
+            </div>
+
+            <div class="preview-panel">
+                <div class="preview-header">
+                    <div class="preview-title">
+                        <span class="dot"></span>
+                        Live Preview
+                    </div>
+                    <div class="preview-info" id="previewInfo">1080 × 1080px</div>
+                </div>
+                
+                <div class="canvas-wrapper">
+                    <canvas id="previewCanvas" width="540" height="540"></canvas>
+                </div>
+
+                <div class="tips">
+                    <div class="tips-title">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="16" x2="12" y2="12"/>
+                            <line x1="12" y1="8" x2="12.01" y2="8"/>
+                        </svg>
+                        Pro Tip
+                    </div>
+                    <p id="tipText">Choose a template and add your headline to get started. High-contrast images work best!</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Built with <span>Canvas API</span> — Digital Transformation Made Simple</p>
+        </footer>
+    </div>
+
+    <!-- Help Modal -->
+    <div class="modal-overlay" id="helpModal">
+        <div class="modal">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <h2>How to Use</h2>
+            
+            <h3>1. Choose a Template</h3>
+            <p>Select from 5 professionally designed templates. Each has a unique style suited for different types of content.</p>
+            
+            <h3>2. Select Format</h3>
+            <p>Pick between Square (Instagram feed), Portrait (4:5), or Story (9:16) formats depending on where you'll post.</p>
+            
+            <h3>3. Add Your Content</h3>
+            <ul>
+                <li><strong>Headline:</strong> The main text that grabs attention</li>
+                <li><strong>Tagline:</strong> Supporting text that adds context</li>
+                <li><strong>Brand Name:</strong> Your company name for attribution</li>
+                <li><strong>Image:</strong> Upload a photo or use the placeholder</li>
+            </ul>
+            
+            <h3>4. Customize Colors</h3>
+            <p>Pick from preset colors or choose your own brand color using the color picker.</p>
+            
+            <h3>5. Download</h3>
+            <p>Click download to get your high-resolution image ready for social media!</p>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('previewCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let currentTemplate = 1;
+        let currentFormat = 'square';
+        let currentTextStyle = 'uppercase';
+        let uploadedImage = null;
+        let accentColor = '#00d9ff';
+        let debounceTimer = null;
+
+        const TEMPLATES = {
+            1: { name: 'bold', width: 1080, height: 1080, accent: '#00d9ff', font: 'Bebas Neue' },
+            2: { name: 'modern', width: 1080, height: 1080, accent: '#ff6b35', font: 'Oswald' },
+            3: { name: 'elegant', width: 1080, height: 1350, accent: '#7b2cbf', font: 'Playfair Display' },
+            4: { name: 'minimal', width: 1080, height: 1080, accent: '#22c55e', font: 'Montserrat' },
+            5: { name: 'vibrant', width: 1080, height: 1920, accent: '#f59e0b', font: 'Bebas Neue' }
+        };
+
+        const FORMATS = {
+            square: { width: 1080, height: 1080, label: '1080 × 1080px' },
+            portrait: { width: 1080, height: 1350, label: '1080 × 1350px' },
+            story: { width: 1080, height: 1920, label: '1080 × 1920px' }
+        };
+
+        const PRESETS = {
+            1: { headline: 'BIG LAUNCH', tagline: 'Something extraordinary is coming' },
+            2: { headline: 'FLASH SALE', tagline: 'Up to 50% off — Limited time only!' },
+            3: { headline: 'SAVE THE DATE', tagline: 'Join us for an unforgettable experience' },
+            4: { headline: 'NEW ARRIVAL', tagline: 'Be the first to experience it' }
+        };
+
+        const TIPS = [
+            'High-contrast images work best for bold templates',
+            'Keep headlines under 6 words for maximum impact',
+            'Use your brand colors for consistent identity',
+            'Square format works best for Instagram & Facebook',
+            'Story format is perfect for Instagram & Facebook Stories',
+            'Portrait format gets more space in the feed'
+        ];
+
+        const elements = {
+            headline: document.getElementById('headline'),
+            tagline: document.getElementById('tagline'),
+            brandName: document.getElementById('brandName'),
+            accentColor: document.getElementById('accentColor'),
+            colorValue: document.getElementById('colorValue'),
+            imageInput: document.getElementById('imageInput'),
+            uploadZone: document.getElementById('uploadZone'),
+            previewThumb: document.getElementById('previewThumb'),
+            uploadedImage: document.getElementById('uploadedImage'),
+            removeImage: document.getElementById('removeImage'),
+            downloadBtn: document.getElementById('downloadBtn'),
+            previewInfo: document.getElementById('previewInfo'),
+            tipText: document.getElementById('tipText'),
+            templateCards: document.querySelectorAll('.template-card'),
+            formatTabs: document.querySelectorAll('.format-tab'),
+            textStyleBtns: document.querySelectorAll('.text-style-btn'),
+            presetColors: document.querySelectorAll('.preset-color'),
+            quickActions: document.querySelectorAll('.quick-action'),
+            helpBtn: document.getElementById('helpBtn'),
+            helpModal: document.getElementById('helpModal'),
+            closeModal: document.getElementById('closeModal'),
+            headlineCount: document.getElementById('headlineCount'),
+            taglineCount: document.getElementById('taglineCount')
+        };
+
+        function init() {
+            elements.templateCards.forEach(card => {
+                card.addEventListener('click', () => selectTemplate(parseInt(card.dataset.template)));
+            });
+
+            elements.formatTabs.forEach(tab => {
+                tab.addEventListener('click', () => selectFormat(tab.dataset.format));
+            });
+
+            elements.textStyleBtns.forEach(btn => {
+                btn.addEventListener('click', () => selectTextStyle(btn.dataset.style));
+            });
+
+            elements.presetColors.forEach(color => {
+                color.addEventListener('click', () => selectColor(color.dataset.color));
+            });
+
+            elements.quickActions.forEach(btn => {
+                btn.addEventListener('click', () => applyPreset(btn.dataset.preset));
+            });
+
+            elements.headline.addEventListener('input', () => {
+                updateCharCount('headline');
+                scheduleRender();
+            });
+
+            elements.tagline.addEventListener('input', () => {
+                updateCharCount('tagline');
+                scheduleRender();
+            });
+
+            elements.brandName.addEventListener('input', scheduleRender);
+
+            elements.accentColor.addEventListener('input', (e) => {
+                accentColor = e.target.value;
+                elements.colorValue.textContent = accentColor;
+                elements.presetColors.forEach(c => c.classList.remove('active'));
+                scheduleRender();
+            });
+
+            elements.uploadZone.addEventListener('click', () => elements.imageInput.click());
+            elements.uploadZone.addEventListener('dragover', handleDragOver);
+            elements.uploadZone.addEventListener('dragleave', handleDragLeave);
+            elements.uploadZone.addEventListener('drop', handleDrop);
+            elements.imageInput.addEventListener('change', handleImageUpload);
+            elements.removeImage.addEventListener('click', removeImage);
+            elements.downloadBtn.addEventListener('click', downloadImage);
+
+            elements.helpBtn.addEventListener('click', () => elements.helpModal.classList.add('active'));
+            elements.closeModal.addEventListener('click', () => elements.helpModal.classList.remove('active'));
+            elements.helpModal.addEventListener('click', (e) => {
+                if (e.target === elements.helpModal) elements.helpModal.classList.remove('active');
+            });
+
+            updateTip();
+            render();
+        }
+
+        function updateCharCount(field) {
+            const count = elements[field].value.length;
+            if (field === 'headline') {
+                elements.headlineCount.textContent = count;
+            } else {
+                elements.taglineCount.textContent = count;
+            }
+        }
+
+        function selectTemplate(templateId) {
+            currentTemplate = templateId;
+            elements.templateCards.forEach(card => {
+                card.classList.toggle('active', parseInt(card.dataset.template) === templateId);
+            });
+            accentColor = TEMPLATES[templateId].accent;
+            elements.accentColor.value = accentColor;
+            elements.colorValue.textContent = accentColor;
+            updateTip();
+            render();
+        }
+
+        function selectFormat(format) {
+            currentFormat = format;
+            elements.formatTabs.forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.format === format);
+            });
+            const formatData = FORMATS[format];
+            elements.previewInfo.textContent = formatData.label;
+            render();
+        }
+
+        function selectTextStyle(style) {
+            currentTextStyle = style;
+            elements.textStyleBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.style === style);
+            });
+            render();
+        }
+
+        function selectColor(color) {
+            accentColor = color;
+            elements.accentColor.value = color;
+            elements.colorValue.textContent = color;
+            elements.presetColors.forEach(c => {
+                c.classList.toggle('active', c.dataset.color === color);
+            });
+            render();
+        }
+
+        function applyPreset(presetId) {
+            const preset = PRESETS[presetId];
+            if (preset) {
+                elements.headline.value = preset.headline;
+                elements.tagline.value = preset.tagline;
+                updateCharCount('headline');
+                updateCharCount('tagline');
+                render();
+            }
+        }
+
+        function updateTip() {
+            const randomTip = TIPS[Math.floor(Math.random() * TIPS.length)];
+            elements.tipText.textContent = randomTip;
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            elements.uploadZone.classList.add('dragover');
+        }
+
+        function handleDragLeave(e) {
+            e.preventDefault();
+            elements.uploadZone.classList.remove('dragover');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            elements.uploadZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file.type.startsWith('image/')) {
+                load && file.type.startsImage(file);
+            }
+        }
+
+        function handleImageUpload(e) {
+            const file = e.target.files[0];
+            if (file) loadImage(file);
+        }
+
+        function loadImage(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    uploadedImage = img;
+                    elements.uploadedImage.src = e.target.result;
+                    elements.previewThumb.classList.add('has-image');
+                    render();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeImage(e) {
+            e.stopPropagation();
+            uploadedImage = null;
+            elements.previewThumb.classList.remove('has-image');
+            elements.imageInput.value = '';
+            render();
+        }
+
+        function scheduleRender() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(render, 120);
+        }
+
+        function render() {
+            const template = TEMPLATES[currentTemplate];
+            const format = FORMATS[currentFormat];
+            
+            canvas.width = format.width;
+            canvas.height = format.height;
+            
+            const scale = 540 / Math.max(format.width, format.height);
+            canvas.style.width = `${format.width * scale}px`;
+            canvas.style.height = `${format.height * scale}px`;
+
+            switch(currentTemplate) {
+                case 1: renderTemplate1(format); break;
+                case 2: renderTemplate2(format); break;
+                case 3: renderTemplate3(format); break;
+                case 4: renderTemplate4(format); break;
+                case 5: renderTemplate5(format); break;
+            }
+        }
+
+        function transformText(text) {
+            if (!text) return '';
+            switch(currentTextStyle) {
+                case 'uppercase': return text.toUpperCase();
+                case 'title': return text.replace(/\b\w/g, l => l.toUpperCase());
+                default: return text;
+            }
+        }
+
+        function renderTemplate1(format) {
+            const w = format.width;
+            const h = format.height;
+            const scale = h / 1080;
+
+            ctx.fillStyle = '#0f0f1a';
+            ctx.fillRect(0, 0, w, h);
+
+            if (uploadedImage) {
+                drawImageCover(uploadedImage, 0, 0, w, h);
+            } else {
+                drawPlaceholder(w, h, accentColor);
+            }
+
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+            ctx.fillRect(0, 0, w, h);
+
+            ctx.fillStyle = accentColor;
+            ctx.fillRect(0, 0, 12 * scale, h);
+
+            const headline = transformText(elements.headline.value) || 'YOUR HEADLINE';
+            const tagline = transformText(elements.tagline.value) || 'Your tagline here';
+            const brand = elements.brandName.value || 'Brand';
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `bold ${90 * scale}px "Bebas Neue", sans-serif`;
+            const headlineWidth = w - 160 * scale;
+            const headlineLines = wrapText(ctx, headline, headlineWidth);
+            let y = 160 * scale;
+            headlineLines.forEach(line => {
+                ctx.fillText(line, 60 * scale, y);
+                y += 95 * scale;
+            });
+
+            ctx.font = `500 ${28 * scale}px "DM Sans", sans-serif`;
+            ctx.fillStyle = accentColor;
+            ctx.fillText(tagline, 60 * scale, y + 20 * scale);
+
+            ctx.font = `400 ${20 * scale}px "DM Sans", sans-serif`;
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            ctx.textAlign = 'right';
+            ctx.fillText(brand, w - 60 * scale, h - 60 * scale);
+            ctx.textAlign = 'left';
+        }
+
+        function renderTemplate2(format) {
+            const w = format.width;
+            const h = format.height;
+            const scale = h / 1080;
+            const splitX = w * 0.4;
+
+            ctx.fillStyle = accentColor;
+            ctx.fillRect(0, 0, splitX, h);
+
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillRect(splitX, 0, w - splitX, h);
+
+            if (uploadedImage) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.rect(splitX, 0, w - splitX, h);
+                ctx.clip();
+                drawImageCover(uploadedImage, splitX, 0, w - splitX, h);
+                ctx.restore();
+            } else {
+                drawPlaceholder(w - splitX, h, accentColor, splitX);
+            }
+
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
+            ctx.fillRect(splitX, 0, w - splitX, h);
+
+            const headline = transformText(elements.headline.value) || 'YOUR HEADLINE';
+            const tagline = transformText(elements.tagline.value) || 'Your tagline';
+            const brand = elements.brandName.value || 'Brand';
+
+            ctx.save();
+            ctx.translate(50 * scale, h / 2);
+            ctx.rotate(-Math.PI / 2);
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `bold ${70 * scale}px "Oswald", sans-serif`;
+            ctx.textAlign = 'left';
+            
+            const lines = wrapText(ctx, headline, h - 200 * scale);
+            let lineY = -(lines.length * 75 * scale) / 2 + 30 * scale;
+            lines.forEach(line => {
+                ctx.fillText(line, -h/2 + 30 * scale, lineY);
+                lineY += 75 * scale;
+            });
+            ctx.restore();
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+            ctx.font = `500 ${22 * scale}px "DM Sans", sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.fillText(tagline, splitX / 2, h - 120 * scale);
+
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
+            ctx.beginPath();
+            ctx.roundRect(splitX / 2 - 80 * scale, h - 80 * scale, 160 * scale, 45 * scale, 10 * scale);
+            ctx.fill();
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `bold ${13 * scale}px "DM Sans", sans-serif`;
+            ctx.fillText('LEARN MORE', splitX / 2, h - 52 * scale);
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.font = `${14 * scale}px "DM Sans", sans-serif`;
+            ctx.textAlign = 'right';
+            ctx.fillText(brand, splitX - 30 * scale, h - 35 * scale);
+            ctx.textAlign = 'left';
+        }
+
+        function renderTemplate3(format) {
+            const w = format.width;
+            const h = format.height;
+            const scale = h / 1350;
+
+            const gradient = ctx.createLinearGradient(0, 0, 0, h);
+            gradient.addColorStop(0, '#1a1a2e');
+            gradient.addColorStop(1, '#0f0f1a');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, w, h);
+
+            const margin = 80 * scale;
+            const imageSize = w - margin * 2;
+            const imageY = margin;
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.roundRect(margin, imageY, imageSize, imageSize, 28 * scale);
+            ctx.clip();
+
+            if (uploadedImage) {
+                drawImageCover(uploadedImage, margin, imageY, imageSize, imageSize);
+            } else {
+                ctx.fillStyle = '#2a2a4e';
+                ctx.fillRect(margin, imageY, imageSize, imageSize);
+                ctx.fillStyle = accentColor;
+                ctx.font = `bold ${100 * scale}px "Bebas Neue", sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.fillText('IMAGE', w/2, imageY + imageSize/2 + 35 * scale);
+            }
+            ctx.restore();
+
+            ctx.strokeStyle = accentColor;
+            ctx.lineWidth = 4 * scale;
+            ctx.beginPath();
+            ctx.roundRect(margin + 10 * scale, imageY + 10 * scale, imageSize - 20 * scale, imageSize - 20 * scale, 22 * scale);
+            ctx.stroke();
+
+            const headline = transformText(elements.headline.value) || 'Your Headline';
+            const tagline = transformText(elements.tagline.value) || 'Your tagline';
+            const brand = elements.brandName.value || 'Brand';
+
+            ctx.textAlign = 'center';
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `bold ${56 * scale}px "Playfair Display", serif`;
+            ctx.fillText(headline, w/2, imageY + imageSize + 70 * scale);
+
+            ctx.strokeStyle = accentColor;
+            ctx.lineWidth = 2 * scale;
+            ctx.beginPath();
+            ctx.moveTo(w/2 - 120 * scale, imageY + imageSize + 95 * scale);
+            ctx.lineTo(w/2 + 120 * scale, imageY + imageSize + 95 * scale);
+            ctx.stroke();
+
+            ctx.fillStyle = '#a0a0b0';
+            ctx.font = `500 ${22 * scale}px "DM Sans", sans-serif`;
+            ctx.fillText(tagline, w/2, imageY + imageSize + 140 * scale);
+
+            ctx.strokeStyle = accentColor;
+            ctx.lineWidth = 2 * scale;
+            ctx.beginPath();
+            ctx.moveTo(w/2 - 70 * scale, imageY + imageSize + 168 * scale);
+            ctx.lineTo(w/2 + 70 * scale, imageY + imageSize + 168 * scale);
+            ctx.stroke();
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.font = `${14 * scale}px "DM Sans", sans-serif`;
+            ctx.fillText(brand, w/2, h - 50 * scale);
+        }
+
+        function renderTemplate4(format) {
+            const w = format.width;
+            const h = format.height;
+            const scale = h / 1080;
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, w, h);
+
+            const sideWidth = w * 0.45;
+
+            if (uploadedImage) {
+                drawImageCover(uploadedImage, 0, 0, sideWidth, h);
+            } else {
+                ctx.fillStyle = '#f0f0f0';
+                ctx.fillRect(0, 0, sideWidth, h);
+                ctx.fillStyle = accentColor;
+                ctx.font = `bold ${60 * scale}px "Bebas Neue", sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.fillText('IMAGE', sideWidth/2, h/2);
+            }
+
+            ctx.fillStyle = accentColor;
+            ctx.fillRect(sideWidth, 0, w - sideWidth, h);
+
+            const headline = transformText(elements.headline.value) || 'HEADLINE';
+            const tagline = transformText(elements.tagline.value) || 'Your tagline';
+            const brand = elements.brandName.value || 'Brand';
+
+            const contentX = sideWidth + (w - sideWidth) / 2;
+            const contentY = h / 2;
+
+            ctx.textAlign = 'center';
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `800 ${72 * scale}px "Montserrat", sans-serif`;
+            const lines = wrapText(ctx, headline, w - sideWidth - 80 * scale);
+            let lineY = contentY - (lines.length - 1) * 40 * scale;
+            lines.forEach(line => {
+                ctx.fillText(line, contentX, lineY);
+                lineY += 80 * scale;
+            });
+
+            ctx.font = `600 ${20 * scale}px "DM Sans", sans-serif`;
+            ctx.fillText(tagline, contentX, lineY + 30 * scale);
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.font = `${14 * scale}px "DM Sans", sans-serif`;
+            ctx.fillText(brand, contentX, h - 50 * scale);
+        }
+
+        function renderTemplate5(format) {
+            const w = format.width;
+            const h = format.height;
+            const scale = h / 1920;
+
+            ctx.fillStyle = '#0f0f1a';
+            ctx.fillRect(0, 0, w, h);
+
+            ctx.fillStyle = accentColor;
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(w * 0.6, 0);
+            ctx.lineTo(w * 0.3, h);
+            ctx.lineTo(0, h);
+            ctx.closePath();
+            ctx.fill();
+
+            if (uploadedImage) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.ellipse(w * 0.7, h * 0.45, w * 0.5, h * 0.4, 0, 0, Math.PI * 2);
+                ctx.clip();
+                drawImageCover(uploadedImage, w * 0.2, h * 0.05, w, h * 0.8);
+                ctx.restore();
+            } else {
+                ctx.fillStyle = '#1f1f3a';
+                ctx.beginPath();
+                ctx.ellipse(w * 0.7, h * 0.45, w * 0.5, h * 0.4, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = accentColor;
+                ctx.font = `bold ${80 * scale}px "Bebas Neue", sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.fillText('IMAGE', w * 0.7, h * 0.45 + 25 * scale);
+            }
+
+            const headline = transformText(elements.headline.value) || 'YOUR HEADLINE';
+            const tagline = transformText(elements.tagline.value) || 'Your tagline';
+            const brand = elements.brandName.value || 'Brand';
+
+            ctx.textAlign = 'left';
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `bold ${100 * scale}px "Bebas Neue", sans-serif`;
+            const lines = wrapText(ctx, headline, w - 100 * scale);
+            let y = h * 0.72;
+            lines.forEach(line => {
+                ctx.fillText(line, 50 * scale, y);
+                y += 105 * scale;
+            });
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.font = `500 ${26 * scale}px "DM Sans", sans-serif`;
+            ctx.fillText(tagline, 50 * scale, y + 20 * scale);
+
+            ctx.fillStyle = accentColor;
+            ctx.beginPath();
+            ctx.roundRect(50 * scale, h - 120 * scale, 180 * scale, 50 * scale, 8 * scale);
+            ctx.fill();
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `bold ${16 * scale}px "DM Sans", sans-serif`;
+            ctx.fillText('GET STARTED', 80 * scale, h - 86 * scale);
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.font = `${14 * scale}px "DM Sans", sans-serif`;
+            ctx.textAlign = 'right';
+            ctx.fillText(brand, w - 50 * scale, h - 50 * scale);
+            ctx.textAlign = 'left';
+        }
+
+        function drawImageCover(img, x, y, w, h) {
+            const imgRatio = img.width / img.height;
+            const targetRatio = w / h;
+            let sx = 0, sy = 0, sw = img.width, sh = img.height;
+
+            if (imgRatio > targetRatio) {
+                sw = img.height * targetRatio;
+                sx = (img.width - sw) / 2;
+            } else {
+                sh = img.width / targetRatio;
+                sy = (img.height - sh) / 2;
+            }
+
+            ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+        }
+
+        function drawPlaceholder(w, h, accentColor, offsetX = 0) {
+            ctx.fillStyle = '#2a2a4e';
+            ctx.fillRect(offsetX, 0, w, h);
+
+            ctx.fillStyle = accentColor;
+            ctx.globalAlpha = 0.25;
+            ctx.font = 'bold 70px "Bebas Neue", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('UPLOAD IMAGE', offsetX + w/2, h/2);
+            ctx.globalAlpha = 1;
+            ctx.textAlign = 'left';
+        }
+
+        function wrapText(ctx, text, maxWidth) {
+            const words = text.split(' ');
+            const lines = [];
+            let currentLine = '';
+
+            words.forEach(word => {
+                const testLine = currentLine + (currentLine ? ' ' : '') + word;
+                const metrics = ctx.measureText(testLine);
+                if (metrics.width > maxWidth && currentLine) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    currentLine = testLine;
+                }
+            });
+            lines.push(currentLine);
+
+            return lines;
+        }
+
+        function downloadImage() {
+            const template = TEMPLATES[currentTemplate];
+            const format = FORMATS[currentFormat];
+            const timestamp = Date.now();
+            const filename = `creative-on-demand-${template.name}-${format.name}-${timestamp}.png`;
+            
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        init();
+    </script>
+</body>
+</html>
